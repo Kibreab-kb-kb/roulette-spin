@@ -192,6 +192,11 @@ function App() {
     setNum(num);
     setCount(count + 1);
 
+    const verdictRow=document.querySelector('bg-verdict')
+    if(verdictRow){
+      verdictRow.classList.remove('hidden-row')
+    }
+
     // Map the array of bets
     arr.map(item => {
       if (item === num) {
@@ -289,26 +294,27 @@ function App() {
                 chip={chip}
                 spinning={spinning}
               />
-              <Row className="bg-red bg-verdict align-items-center">
-                <Col md={4} className="d-flex align-items-center coins-col justify-content-center">
-                  <h4 className="m-0">${coins}</h4>
-                </Col>
-                <Col md={8}>
-                  <div className="text-center">
-                    <h6 className="text-uppercase">{message}</h6>
-                  </div>
-                  <div className="text-center">
-                    <div className="divider-line divider-line-center divider-line-linear-gradient w-100 mx-auto my-4">
-                      <GiDiamonds className="diamond-line-icon" />
-                    </div>
-                    <ul className="list-inline ">
-                      <li className="list-inline-item">Spins: {count}</li>
-                      <li className="list-inline-item">Wins: {wins}</li>
-                      <li className="list-inline-item">Losses: {losses}</li>
-                    </ul>
-                  </div>
-                </Col>
-              </Row>
+            <Row className="bg-red bg-verdict align-items-center hidden-row">
+      <Col md={4} className="d-flex align-items-center coins-col justify-content-center">
+    <h4 className="m-0">${coins}</h4>
+  </Col>
+  <Col md={8}>
+    <div className="text-center">
+      <h6 className="text-uppercase">{message}</h6>
+    </div>
+    <div className="text-center">
+      <div className="divider-line divider-line-center divider-line-linear-gradient w-100 mx-auto my-4">
+        <GiDiamonds className="diamond-line-icon" />
+      </div>
+      <ul className="list-inline ">
+        <li className="list-inline-item">Spins: {count}</li>
+        <li className="list-inline-item">Wins: {wins}</li>
+        <li className="list-inline-item">Losses: {losses}</li>
+      </ul>
+    </div>
+  </Col>
+</Row>
+
             </Col>
             <Col className="align-self-center">
               <Wheel

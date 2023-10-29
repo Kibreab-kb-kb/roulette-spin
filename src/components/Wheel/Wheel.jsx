@@ -19,8 +19,14 @@ const Wheel = (props) => {
 
   useEffect(() => {
     drawRouletteWheel();
-    return stopRotateWheel;
+    // return stopRotateWheel;
   }, []);
+
+  useEffect(()=>{
+    if(state.spinTime===0){
+      rotate();
+    }
+  },[state.spinTime])
 
   const drawRouletteWheel = () => {
     let { startAngle, arc } = state;
@@ -64,8 +70,16 @@ const Wheel = (props) => {
 
   const spin = () => {
     spinTimer.current = null;
-    setState({ ...state, spinTime: 0 }, () => rotate());
+    setState({ ...state, spinTime: 0 });
+
   };
+
+  useEffect(() => {
+    if (state.spinTime === 0) {
+      rotate();
+    }
+  }, [state.spinTime]);
+  
 
   const rotate = () => {
     const { spinAngleStart, spinTime, startAngle, spinTimeTotal } = state;
@@ -74,16 +88,27 @@ const Wheel = (props) => {
       stopRotateWheel();
     } else {
       const spinAngle = spinAngleStart - easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
+      const newStartAngle=startAngle+spinAngle*(Math.PI/180);
+      const newSpinTime=spinTime+10;
+
       setState({
-        startAngle: startAngle + spinAngle * Math.PI / 180,
-        spinTime: spinTime + 10,
-      }, () => {
-        drawRouletteWheel();
-        clearTimeout(spinTimer.current);
-        spinTimer.current = setTimeout(rotate, 30);
+        ...state,
+        startAngle: newStartAngle,
+        spinTime: newSpinTime,
       });
+  
+      // // Schedule the next rotation
+      // clearTimeout(spinTimer.current);
+      // spinTimer.current = setTimeout(rotate, 30);
+    
+      
+     
     }
+
   };
+
+  
+
 
   const stopRotateWheel = () => {
     let { startAngle, arc } = state;
@@ -113,7 +138,7 @@ const Wheel = (props) => {
   const SpinButton = () => {
     return (
       <div>
-        <input type="button" value="spin" className="btn btn-primary p-2 m-2" id="spin" onClick={handleOnClick} />
+        <input type="button" value='spin' className="btn btn-primary p-2 m-2" id="spin" onClick={handleOnClick} />
       </div>
     );
   };
@@ -141,7 +166,8 @@ const Wheel = (props) => {
             onClick={handleOnClick}
             className="m-2 spin-button"
             size="lg"
-            block variant="danger"
+            block ="true"
+            variant="danger"
           >
             <h5 className="blink text-uppercase m-0">Spin the wheel!</h5>
           </Button>
@@ -149,7 +175,7 @@ const Wheel = (props) => {
           <Button
             className="m-2 spin-button text-small"
             size="lg"
-            block
+            block="true"
             variant="dark"
           >
             {renderBtnText()}

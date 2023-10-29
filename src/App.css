@@ -52,7 +52,7 @@ left: auto;
 right: auto;
 margin-left: -1.42857rem; }
 
-/* .bg-verdict {
+.bg-verdict {
 margin-top: 20px;
 padding: 10px;
 border-radius: 10px;
@@ -62,7 +62,7 @@ flex-wrap: wrap;
 word-wrap: break-word;
 min-height: 100px;
 color: #F2F098;
-} */
+}
 
 .bg-verdict {
   position: absolute;
@@ -74,6 +74,13 @@ color: #F2F098;
   border-radius: 12px;
   transition: transform 1s; /* Add a transition for the transform property */
   transform: scale(0); /* Initially, scale down to hide the element */
+}
+.bg-verdict.hidden-row{
+  display: none;
+}
+
+.bg-verdict.show-verdict{
+  transform:scale(1) ;
 }
 
 /* Add a class for showing the .bg-verdict element */
