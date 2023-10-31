@@ -53,7 +53,7 @@
     color: #fff294;
   }
 }
-/* Define a keyframe animation for full rotation */
+
 @keyframes full-rotation {
   0% {
     transform: rotate(0deg);
@@ -64,11 +64,8 @@
 }
 
 .roulette-container {
-  /* Your existing styles for .roulette-container */
-
-  /* Apply animation when needed */
-  animation: full-rotation 5s linear; /* Adjust the duration (5s) as needed */
+ 
+  animation: full-rotation 5s linear; 
 }
 
-/* Rest of your CSS */
 
