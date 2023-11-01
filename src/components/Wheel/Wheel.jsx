@@ -141,7 +141,8 @@ const Wheel = (props) => {
             onClick={handleOnClick}
             className="m-2 spin-button"
             size="lg"
-            block variant="danger"
+           
+            variant="danger"
           >
             <h5 className="blink text-uppercase m-0">Spin the wheel!</h5>
           </Button>
@@ -149,7 +150,7 @@ const Wheel = (props) => {
           <Button
             className="m-2 spin-button text-small"
             size="lg"
-            block
+           
             variant="dark"
           >
             {renderBtnText()}

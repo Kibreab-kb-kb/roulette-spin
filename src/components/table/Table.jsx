@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './Table.css';
 import Chip from '../chips/HouseChips';
 import { Overlay, OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
@@ -17,6 +17,7 @@ const RouletteTable = (props) => {
     columnLeft: props.columnLeft,
     columnRight: props.columnRight,
     disabled: false,
+    coins: props.coins, // Added coins to state
     /* END JSONS ROWS */
   });
 
@@ -36,15 +37,13 @@ const RouletteTable = (props) => {
     // Saving in a variable the row from state with that name
     let row = [...state[whichRow]];
 
-    let coins; // Variable for coins
-
     // Bets Deselect Handling Starts
     if (nums.indexOf(num) >= 0) {
       // If the number is present in the array, deselect and remove it from the array
       nums.splice(nums.indexOf(num), 1);
 
       // Giving back coins I bet on this number
-      coins = props.coins + props.chip;
+      const coins = state.coins + props.chip; // Updated to use state.coins
 
       // Tricky part: map each of the rows and check if the chip is visible, if it is, remove it
       const updatedRow = row.map((chip) => {
@@ -56,16 +55,16 @@ const RouletteTable = (props) => {
 
       props.updateRow(whichRow, updatedRow); // Passing back to Roulette.js component updated props
 
-      setState({ ...state, [whichRow]: updatedRow }); // Setting the new state with removed chips from the rows
-
-      // Bets Deselect Handling Ends
-
-      // Bets Select Handling Starts
+      setState((prevState) => ({
+        ...prevState,
+        [whichRow]: updatedRow,
+        coins, // Setting the new state with removed chips from the rows
+      }));
     } else if (nums.indexOf(num) === -1) {
       // If the number is NOT present in the array, select it and put the chip on it
 
       // Decrementing coins
-      coins = props.coins - props.chip;
+      const coins = state.coins - props.chip; // Updated to use state.coins
 
       nums.push(num); // Adding the selected number to the array of bets
 
@@ -77,16 +76,15 @@ const RouletteTable = (props) => {
         return chip;
       });
 
-      setState({ ...state, [whichRow]: updatedRow }); // Setting the new state with added chips to the rows
+      setState((prevState) => ({
+        ...prevState,
+        [whichRow]: updatedRow,
+        coins, // Setting the new state with added chips to the rows
+      }));
     }
 
     // Passing back to Roulette.js the updated array
     props.updateArr(nums);
-
-    // Passing back to Roulette.js the updated coins count
-    setState({ ...state, coins }, () => {
-      props.updateCoins(coins);
-    });
   };
 
   // Designing the whole table in pure CSS mapping JSON objects with numbers, borders, etc.
