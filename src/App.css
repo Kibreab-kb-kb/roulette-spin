@@ -2,6 +2,7 @@ body {
   background: #000 url("images/greenCasino.jpg") no-repeat center -80px ;
   background-size: cover;
   color: #f1c876;
+
 }
 
 .table {
@@ -9,7 +10,7 @@ margin: 10px auto;
 padding: 20px;
 border: 2px solid #dcb44a;
 border-radius: 16px;
-background: linear-gradient(to bottom, #121212, #2badad, #121212); 
+background: linear-gradient(to bottom, #121212, #25ebeb, #121212); 
 width: 100%;
 }
 
@@ -43,8 +44,8 @@ font-size: 16px;
 line-height: 16px;
 text-align: left;
 font-style: normal; 
-color: #db1f27;
-background-color: #8B0000; 
+color: #e2131d;
+background-color: #9c0000; 
 }
 
 .divider-line-center .diamond-line-icon {
@@ -52,7 +53,7 @@ left: auto;
 right: auto;
 margin-left: -1.42857rem; }
 
-/* .bg-verdict {
+.bg-verdict {
 margin-top: 20px;
 padding: 10px;
 border-radius: 10px;
@@ -62,25 +63,7 @@ flex-wrap: wrap;
 word-wrap: break-word;
 min-height: 100px;
 color: #F2F098;
-} */
-
-.bg-verdict {
-  position: absolute;
-  width: 500px;
-  height: 318px;
-  background-color: #ad0205;
-  z-index: 10;
-  border: 8px solid #d3b201;
-  border-radius: 12px;
-  transition: transform 1s; /* Add a transition for the transform property */
-  transform: scale(0); /* Initially, scale down to hide the element */
 }
-
-/* Add a class for showing the .bg-verdict element */
-.show-verdict {
-  transform: scale(1);
-}
-
 
 /* Global styles */
 
@@ -92,7 +75,7 @@ font-size: 90%;
 padding-top: 6px;
 }
 .bg-red {
-background-color: green;
+background-color: #125835;
 }
 
 .text-light-gold {

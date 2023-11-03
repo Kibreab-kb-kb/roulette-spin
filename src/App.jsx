@@ -17,7 +17,7 @@ import fifthRow from './components/table/rows/FifthRow.json';
 import columnLeft from './components/table/rows/ColumnLeft.json';
 import columnRight from './components/table/rows/ColumnRight.json';
 
-function App() {
+const App=()=> {
   const [num, setNum] = useState('');
   const [arr, setArr] = useState([]);
   const [count, setCount] = useState(0);
@@ -65,55 +65,55 @@ function App() {
   const even = ["2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36"];
   const odd = ['1', '3', '5', '7', '9', '11', '13', '15', '17', '19', '21', '23', '25', '27', '29', '31', '33', '35'];
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [response1, response2, response3,response4,response5,response6,response7,response8,response9,response10] = await Promise.all([
-          fetch('src/components/table/rows/ColumnLeft.json'),
-          fetch('src/components/table/rows/ColumnRight.json'),
-          fetch('src/components/table/rows/FifthRow.json'),
-          fetch('src/components/table/rows/FirstBorder.json'),
-          fetch('src/components/table/rows/FirstRow.json'),
-          fetch('src/components/table/rows/FourthRow.json'),
-          fetch('src/components/table/rows/SecondBorder.json'),
-          fetch('src/components/table/rows/SecondRow.json'),
-          fetch('src/components/table/rows/ThirdBorder.json'),
-          fetch('src/components/table/rows/ThirdRow.json'),
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const [response1, response2, response3,response4,response5,response6,response7,response8,response9,response10] = await Promise.all([
+  //         fetch('src/components/table/rows/ColumnLeft.json'),
+  //         fetch('src/components/table/rows/ColumnRight.json'),
+  //         fetch('src/components/table/rows/FifthRow.json'),
+  //         fetch('src/components/table/rows/FirstBorder.json'),
+  //         fetch('src/components/table/rows/FirstRow.json'),
+  //         fetch('src/components/table/rows/FourthRow.json'),
+  //         fetch('src/components/table/rows/SecondBorder.json'),
+  //         fetch('src/components/table/rows/SecondRow.json'),
+  //         fetch('src/components/table/rows/ThirdBorder.json'),
+  //         fetch('src/components/table/rows/ThirdRow.json'),
 
 
 
-        ]);
+  //       ]);
   
-        const [json1, json2, json3,json4,json5,json6,json7,json8,json9,json10] = await Promise.all([
-          response1.json(),
-          response2.json(),
-          response3.json(),
-          response4.json(),
-          response5.json(),
-          response6.json(),
-          response7.json(),
-          response8.json(),
-          response9.json(),
-          response10.json()
-        ]);
+  //       const [json1, json2, json3,json4,json5,json6,json7,json8,json9,json10] = await Promise.all([
+  //         response1.json(),
+  //         response2.json(),
+  //         response3.json(),
+  //         response4.json(),
+  //         response5.json(),
+  //         response6.json(),
+  //         response7.json(),
+  //         response8.json(),
+  //         response9.json(),
+  //         response10.json()
+  //       ]);
   
-        setData1(json1);
-        setData2(json2);
-        setData3(json3);
-        setData4(json4);
-        setData5(json5);
-        setData6(json6);
-        setData7(json7);
-        setData8(json8);
-        setData9(json9);
-        setData10(json10);
-      } catch (error) {
-        console.error('Error fetching JSON data:', error);
-      }
-    };
+  //       setData1(json1);
+  //       setData2(json2);
+  //       setData3(json3);
+  //       setData4(json4);
+  //       setData5(json5);
+  //       setData6(json6);
+  //       setData7(json7);
+  //       setData8(json8);
+  //       setData9(json9);
+  //       setData10(json10);
+  //     } catch (error) {
+  //       console.error('Error fetching JSON data:', error);
+  //     }
+  //   };
   
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
   
 
   const isSpinning = (isspinning) => {
@@ -191,6 +191,11 @@ function App() {
   const updateNum = (num) => {
     setNum(num);
     setCount(count + 1);
+
+    const verdictRow=document.querySelector('bg-verdict')
+    if(verdictRow){
+      verdictRow.classList.remove('hidden-row')
+    }
 
     // Map the array of bets
     arr.map(item => {
@@ -289,26 +294,27 @@ function App() {
                 chip={chip}
                 spinning={spinning}
               />
-              <Row className="bg-red bg-verdict align-items-center">
-                <Col md={4} className="d-flex align-items-center coins-col justify-content-center">
-                  <h4 className="m-0">${coins}</h4>
-                </Col>
-                <Col md={8}>
-                  <div className="text-center">
-                    <h6 className="text-uppercase">{message}</h6>
-                  </div>
-                  <div className="text-center">
-                    <div className="divider-line divider-line-center divider-line-linear-gradient w-100 mx-auto my-4">
-                      <GiDiamonds className="diamond-line-icon" />
-                    </div>
-                    <ul className="list-inline ">
-                      <li className="list-inline-item">Spins: {count}</li>
-                      <li className="list-inline-item">Wins: {wins}</li>
-                      <li className="list-inline-item">Losses: {losses}</li>
-                    </ul>
-                  </div>
-                </Col>
-              </Row>
+            <Row className="bg-red bg-verdict align-items-center hidden-row">
+      <Col md={4} className="d-flex align-items-center coins-col justify-content-center">
+    <h4 className="m-0">${coins}</h4>
+  </Col>
+  <Col md={8}>
+    <div className="text-center">
+      <h6 className="text-uppercase">{message}</h6>
+    </div>
+    <div className="text-center">
+      <div className="divider-line divider-line-center divider-line-linear-gradient w-100 mx-auto my-4">
+        <GiDiamonds className="diamond-line-icon" />
+      </div>
+      <ul className="list-inline ">
+        <li className="list-inline-item">Spins: {count}</li>
+        <li className="list-inline-item">Wins: {wins}</li>
+        <li className="list-inline-item">Losses: {losses}</li>
+      </ul>
+    </div>
+  </Col>
+</Row>
+
             </Col>
             <Col className="align-self-center">
               <Wheel
@@ -317,6 +323,7 @@ function App() {
                 num={num}
                 arr={arr}
                 count={count}
+
               />
             </Col>
           </Row>
